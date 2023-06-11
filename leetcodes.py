@@ -756,3 +756,802 @@ class Leetcode:
         for ele in words:
             reversed_words.append(ele[::-1])
         return " ".join(reversed_words)
+    
+    #1742: Maximum Number of Balls in a Box
+    @staticmethod
+    def sum_of_digits(digit,sum=0):
+        sum=0
+        while digit:
+            sum+=digit%10
+            digit=digit//10
+        return sum
+    def lc_1742(self,lowerLimit,highLimit):
+        
+        '''
+        You are working in a ball factory where you have n balls numbered from lowLimit up to highLimit inclusive 
+        (i.e., n == highLimit - lowLimit + 1), and an infinite number of boxes numbered from 1 to infinity.
+        Your job at this factory is to put each ball in the box with a number equal to the sum of digits of the ball's number. 
+        For example, the ball number 321 will be put in the box number 3 + 2 + 1 = 6 and the ball number 
+        10 will be put in the box number 1 + 0 = 1.
+        Given two integers lowLimit and highLimit, return the number of balls in the box with the most balls.
+
+        Example 1:
+        Input: lowLimit = 1, highLimit = 10
+        Output: 2
+        Explanation:
+        Box Number:  1 2 3 4 5 6 7 8 9 10 11 ...
+        Ball Count:  2 1 1 1 1 1 1 1 1 0  0  ...
+        Box 1 has the most number of balls with 2 balls.
+             --------------------------------------------------- Swetha
+        '''
+        my_dict={}
+        for i in range(lowerLimit,highLimit+1):
+            sum=sum_of_digits(i)
+            if sum in my_dict:
+                my_dict[sum]+=1
+            else:
+                my_dict[sum]=1
+        return max(my_dict.values())
+    
+    #1929: Concatenation of Array
+    def lc_1929(self,nums:list[int]):
+
+        '''
+        Given an integer array nums of length n, you want to create an array ans of length 2n 
+        where ans[i] == nums[i] and ans[i + n] == nums[i] for 0 <= i < n (0-indexed).
+        Specifically, ans is the concatenation of two nums arrays.
+        Return the array ans.
+
+        Example 1:
+
+        Input: nums = [1,2,1]
+        Output: [1,2,1,1,2,1]
+        Explanation: The array ans is formed as follows:
+        - ans = [nums[0],nums[1],nums[2],nums[0],nums[1],nums[2]]
+        - ans = [1,2,1,1,2,1]
+          ------------------------------------------------------------Swetha
+        '''
+
+        return nums*2
+
+    
+    #762: Prime Number of Set Bits in Binary Representation
+    @staticmethod
+    def is_prime(n):
+
+        if n<2:
+            return False
+        for i in range(2,(n//2)+1):
+            if n%i==0:
+                return False
+        return True
+
+    #left=int(input())
+    #right=int(input())
+
+    def lc_762(self):
+        
+        '''
+        Given two integers left and right, return the count of numbers in the inclusive range [left, right] 
+        having a prime number of set bits in their binary representation.
+        Recall that the number of set bits an integer has is the number of 1's present when written in binary.
+        For example, 21 written in binary is 10101, which has 3 set bits. 
+
+        Example 1:
+        Input: left = 6, right = 10
+        Output: 4
+        Explanation:
+        6  -> 110 (2 set bits, 2 is prime)
+        7  -> 111 (3 set bits, 3 is prime)
+        8  -> 1000 (1 set bit, 1 is not prime)
+        9  -> 1001 (2 set bits, 2 is prime)
+        10 -> 1010 (2 set bits, 2 is prime)
+        4 numbers have a prime number of set bits.
+                        ----------------------------------Swetha
+        '''
+        count=0
+        for i in range(6,10+1):
+            x=(str(bin(i))[2:])
+            if is_prime(x.count('1')):
+                count+=1
+        return count
+    
+    #1470: Shuffle the Array
+    def lc_1470(self, nums:list[int], n):
+        
+        '''
+        Given the array nums consisting of 2n elements in the form [x1,x2,...,xn,y1,y2,...,yn].
+        Return the array in the form [x1,y1,x2,y2,...,xn,yn]. 
+        Example 1:
+        Input: nums = [2,5,1,3,4,7], n = 3
+        Output: [2,3,5,4,1,7] 
+        Explanation: Since x1=2, x2=5, x3=1, y1=3, y2=4, y3=7 then the answer is [2,3,5,4,1,7].
+          ----------------------------------------------- Swetha
+        '''
+        
+        x=nums[0:n]
+        y=nums[n:]
+        new_arr=[]
+        for i in range(n):
+            new_arr.append(x[i])
+            new_arr.append(y[i])
+        return new_arr
+    
+    #509: Fibonacci Number    
+    def lc_509(self, n: int) -> int:
+                
+        '''
+        The Fibonacci numbers, commonly denoted F(n) form a sequence, called the Fibonacci sequence, 
+        such that each number is the sum of the two preceding ones, starting from 0 and 1. That is,
+        F(0) = 0, F(1) = 1
+        F(n) = F(n - 1) + F(n - 2), for n > 1.
+        Given n, calculate F(n).
+        Example 1:
+        Input: n = 2
+        Output: 1
+        Explanation: F(2) = F(1) + F(0) = 1 + 0 = 1.
+          -------------------------------------------------- Swetha
+        '''
+        
+        if n==0:
+            return 0
+        if n==1:
+            return 1
+        else:
+            
+            return self.lc_509(n-1)+self.lc_509(n-2)
+        
+
+    #2235: Add Two Integers
+    def lc_2235(self, num1: int, num2: int):
+            
+        '''
+        Given two integers num1 and num2, return the sum of the two integers.
+        Example 1:
+        Input: num1 = 12, num2 = 5
+        Output: 17
+        Explanation: num1 is 12, num2 is 5, and their sum is 12 + 5 = 17, so 17 is returned.
+        --------------------------------------------------- Sai
+        '''
+        c=num1+num2
+        return c
+    
+    
+    #1603: Design Parking System
+    @staticmethod
+    def addCar(carType:int,ParkingSystem)->bool:
+        mapping = {1: "big",2:"medium",3: "small"}
+        
+        if ParkingSystem[mapping[carType]]!=0:
+            ParkingSystem[mapping[carType]]-=1
+            return True
+        return False
+    def lc_1603(self,big:int,medium:int,small:int):
+        '''
+        Design a parking system for a parking lot. 
+        The parking lot has three kinds of parking spaces: big, medium, and small, 
+        with a fixed number of slots for each size.
+
+        Implement the ParkingSystem class:
+
+        ParkingSystem(int big, int medium, int small) Initializes object of the ParkingSystem class.
+        The number of slots for each parking space are given as part of the constructor.
+        bool addCar(int carType) Checks whether there is a parking space of carType for the car that wants to get 
+        into the parking lot. 
+        carType can be of three kinds: big, medium, or small, which are represented by 1, 2, and 3 respectively. 
+        A car can only park in a parking space of its carType. 
+        If there is no space available, return false, else park the car in that size space and return true.
+ 
+
+        Example 1:
+
+        Input
+        ["ParkingSystem", "addCar", "addCar", "addCar", "addCar"]
+        [[1, 1, 0], [1], [2], [3], [1]]
+        Output
+        [null, true, true, false, false]
+
+        Explanation
+        ParkingSystem parkingSystem = new ParkingSystem(1, 1, 0);
+        parkingSystem.addCar(1); // return true because there is 1 available slot for a big car
+        parkingSystem.addCar(2); // return true because there is 1 available slot for a medium car
+        parkingSystem.addCar(3); // return false because there is no available slot for a small car
+        parkingSystem.addCar(1); // return false because there is no available slot for a big car. 
+        It is already occupied.
+        --------------------------------------------------- Sai
+        '''
+        l=[]
+        ParkingSystem={'big':big,'medium':medium,'small':small}
+        ac=self.addCar(1,ParkingSystem) 
+        l.append(ac)
+        ac=self.addCar(2,ParkingSystem) 
+        l.append(ac)
+        ac=self.addCar(3,ParkingSystem) 
+        l.append(ac)
+        ac=self.addCar(1,ParkingSystem) 
+        l.append(ac)
+        return l
+    
+
+    #1025: Divisor Game
+    def lc_1025(self, n: int) -> bool:
+        
+        '''
+        Alice and Bob take turns playing a game, with Alice starting first.
+        Initially, there is a number n on the chalkboard. 
+        On each player's turn, that player makes a move consisting of:
+        Choosing any x with 0 < x < n and n % x == 0.
+        Replacing the number n on the chalkboard with n - x.
+        Also, if a player cannot make a move, they lose the game.
+        Return true if and only if Alice wins the game, assuming both players play optimally.
+
+        Example 1:
+        Input: n = 2
+        Output: true
+        Explanation: Alice chooses 1, and Bob has no more moves.
+        --------------------------------------------------- Sai
+        '''
+        if (n%2==0):
+            return True
+        else:
+            return False
+
+    
+    #1678:  Goal Parser Interpretation
+    def lc_1678(self,command):
+
+        '''
+        You own a Goal Parser that can interpret a string command. 
+        The command consists of an alphabet of "G", "()" and/or "(al)" in some order. 
+        The Goal Parser will interpret "G" as the string "G", "()" as the string "o", and "(al)" as the string "al". 
+        The interpreted strings are then concatenated in the original order.
+        Given the string command, return the Goal Parser's interpretation of command.
+
+        Example 1:
+        Input: command = "G()(al)"
+        Output: "Goal"
+        Explanation: The Goal Parser interprets the command as follows:
+        G -> G
+        () -> o
+        (al) -> al
+        The final concatenated result is "Goal".
+        --------------------------------------------------- Sai
+        '''
+
+        interp = ""
+        i = 0
+        while i < len(command):
+            if command[i] == 'G':
+                interp += 'G'
+                i += 1
+            elif command[i] == '(' and command[i+1] == ')':
+                interp += 'o'
+                i += 2
+            elif command[i] == '(' and command[i+1] == 'a' and command[i+2] == 'l' and command[i+3] == ')':
+                interp += 'al'
+                i += 4
+            else:
+                # Invalid command, handle error or raise exception
+                return "Invalid command"
+        return interp 
+    
+
+    #2648: Generate Fibonacci Sequence
+    @staticmethod
+    def Fib(n):
+        if n <= 1:
+            return n
+        else:
+            return (Fib(n - 1) + Fib(n - 2)) # function calling itself(recursion)
+
+    def lc_2648(self,n):
+   
+        '''
+        Write a generator function that returns a generator object which yields the fibonacci sequence.
+        The fibonacci sequence is defined by the relation Xn = Xn-1 + Xn-2.
+        The first few numbers of the series are 0, 1, 1, 2, 3, 5, 8, 13. 
+
+        Example 1:
+
+        Input: callCount = 5
+        Output: [0,1,1,2,3]
+        Explanation:
+        const gen = fibGenerator();
+        gen.next().value; // 0
+        gen.next().value; // 1
+        gen.next().value; // 1
+        gen.next().value; // 2
+        gen.next().value; // 3
+        --------------------------------------------------- Sai
+        '''
+    
+        l=[]
+        for i in range(n):
+            l.append(Fib(i))
+        return l
+
+    #1374:Generate a String With Characters That Have Odd Counts
+    def lc_1374(self,n):
+
+        '''
+        Given an integer n, return a string with n characters 
+        such that each character in such string occurs an odd number of times.
+        The returned string must contain only lowercase English letters. 
+        If there are multiples valid strings, return any of them.  
+
+        Example 1:
+
+        Input: n = 4
+        Output: "pppz"
+        Explanation: "pppz" is a valid string since the character 'p' occurs three times and the character 'z' occurs once. 
+        Note that there are many other valid strings such as "ohhh" and "love".
+        --------------------------------------------------- Manoj
+        '''
+
+        if n % 2 == 0:
+            return 'a' * (n-1) + 'b'
+        else:
+            return 'a' * n
+
+
+    #1313: Decompress Run-Length Encoded List
+    def lc_1313(self,n):
+
+        '''
+        We are given a list nums of integers representing a list compressed with run-length encoding.
+        Consider each adjacent pair of elements [freq, val] = [nums[2*i], nums[2*i+1]] (with i >= 0).  
+        For each such pair, there are freq elements with value val concatenated in a sublist. 
+        Concatenate all the sublists from left to right to generate the decompressed list.
+        Return the decompressed list.
+
+        Example 1:
+        Input: nums = [1,2,3,4]
+        Output: [2,4,4,4]
+        Explanation: The first pair [1,2] means we have freq = 1 and val = 2 so we generate the array [2].
+        The second pair [3,4] means we have freq = 3 and val = 4 so we generate [4,4,4].
+        At the end the concatenation [2] + [4,4,4] is [2,4,4,4].
+        --------------------------------------------------- Manoj
+        '''
+
+        x=[]
+        for i in range(0,len(n),2):
+            x=x+[n[i+1]]*n[i]
+        return x
+
+
+    #2652: Sum Multiples
+    def lc_2652(self,a,n):
+
+        '''
+        Given a positive integer n, 
+        find the sum of all integers in the range [1, n] inclusive that are divisible by 3, 5, or 7.
+        Return an integer denoting the sum of all numbers in the given range satisfying the constraint.
+
+        Example 1:
+        Input: n = 7
+        Output: 21
+        Explanation: Numbers in the range [1, 7] that are divisible by 3, 5, or 7 are 3, 5, 6, 7. 
+        The sum of these numbers is 21.
+        --------------------------------------------------- Manoj
+        '''
+
+        sum=0
+        for num in range(a,n+1):
+            if num%3==0 or num%5==0 or num%7==0:
+                sum+=num
+        return sum
+
+    
+    
+    #1656: Design an Ordered Stream
+    
+    '''
+    There is a stream of n (idKey, value) pairs arriving in an arbitrary order, 
+    where idKey is an integer between 1 and n and value is a string. No two pairs have the same id.
+
+    Design a stream that returns the values in increasing order of their IDs by returning a chunk (list) of values 
+    after each insertion. The concatenation of all the chunks should result in a list of the sorted values.
+
+    Implement the OrderedStream class:
+    OrderedStream(int n) Constructs the stream to take n values.
+    String[] insert(int idKey, String value) Inserts the pair (idKey, value) into the stream, 
+    then returns the largest possible chunk of currently inserted values that appear next in the order.
+    Input
+    ["OrderedStream", "insert", "insert", "insert", "insert", "insert"]
+    [[5], [3, "ccccc"], [1, "aaaaa"], [2, "bbbbb"], [5, "eeeee"], [4, "ddddd"]]
+    Output
+    [null, [], ["aaaaa"], ["bbbbb", "ccccc"], [], ["ddddd", "eeeee"]]
+
+    Explanation
+    // Note that the values ordered by ID is ["aaaaa", "bbbbb", "ccccc", "ddddd", "eeeee"].
+    OrderedStream os = new OrderedStream(5);
+    os.insert(3, "ccccc"); // Inserts (3, "ccccc"), returns [].
+    os.insert(1, "aaaaa"); // Inserts (1, "aaaaa"), returns ["aaaaa"].
+    os.insert(2, "bbbbb"); // Inserts (2, "bbbbb"), returns ["bbbbb", "ccccc"].
+    os.insert(5, "eeeee"); // Inserts (5, "eeeee"), returns [].
+    os.insert(4, "ddddd"); // Inserts (4, "ddddd"), returns ["ddddd", "eeeee"].
+    // Concatentating all the chunks returned:
+    // [] + ["aaaaa"] + ["bbbbb", "ccccc"] + [] + ["ddddd", "eeeee"] = ["aaaaa", "bbbbb", "ccccc", "ddddd", "eeeee"]
+    // The resulting order is the same as the order above.
+    --------------------------------------------------------------- Manoj
+    '''
+    @staticmethod
+    def insert(idKey: int, value: str,stream,ptr) :
+        #print(idKey)
+        #print(value)
+        idKey -= 1  # Adjust the ID to match the array index
+        #print('changed id : ',idKey)
+        #print(value)
+        stream[idKey] = value  # Store the value in the array
+
+        if idKey == ptr:
+            # If the inserted ID is the next expected ID, find the largest possible chunk
+            chunk = []
+            while ptr < len(stream) and stream[ptr]:
+                chunk.append(stream[ptr])
+                ptr += 1
+                #print(chunk)
+            return chunk,ptr
+        else:
+            return []
+
+    def lc_1656(self,z):
+        stream = [None] * z[0][0]  # Initialize an array to store the values
+        ptr = 0  # Pointer to keep track of the next expected ID
+        l=[]
+        for y in range(1,len(z)):
+            i=self.insert(z[y][0],z[y][1],stream,ptr)
+            if len(i)==0:
+                l.append(i)
+            else:
+                ptr=i[1]
+                l.append(i[0])
+        return l
+    
+    
+    
+    #2418: Sort the People
+    def lc_2418(self,names,heights):
+        '''
+        You are given an array of strings names, and an array heights that consists of distinct positive integers. 
+        Both arrays are of length n.
+        For each index i, names[i] and heights[i] denote the name and height of the ith person.
+        Return names sorted in descending order by the people's heights.
+
+        Example 1:
+
+        Input: names = ["Mary","John","Emma"], heights = [180,165,170]
+        Output: ["Mary","Emma","John"]
+        Explanation: Mary is the tallest, followed by Emma and John.
+        --------------------------------------------------- Manoj
+        '''
+        final_list=[]
+        sorted_heights=sorted(heights,reverse=True)
+        for i in sorted_heights:
+            pos=heights.index(i)
+            k=names[pos]
+            final_list.append(k)
+        return final_list
+    
+    
+    
+    #2194: Cells in a Range on an Excel Sheet
+    def lc_2194(self,s):
+
+        '''
+        A cell (r, c) of an excel sheet is represented as a string "<col><row>" where:
+
+        <col> denotes the column number c of the cell. It is represented by alphabetical letters.
+        For example, the 1st column is denoted by 'A', the 2nd by 'B', the 3rd by 'C', and so on.
+        <row> is the row number r of the cell. The rth row is represented by the integer r.
+        You are given a string s in the format "<col1><row1>:<col2><row2>", 
+        where <col1> represents the column c1, <row1> represents the row r1, 
+        <col2> represents the column c2, and <row2> represents the row r2, such that r1 <= r2 and c1 <= c2.
+
+        Return the list of cells (x, y) such that r1 <= x <= r2 and c1 <= y <= c2. 
+        The cells should be represented as strings in the format mentioned above and 
+        be sorted in non-decreasing order first by columns and then by rows.
+        
+        Example 1:
+        Input: s = "K1:L2"
+        Output: ["K1","K2","L1","L2"]
+        Explanation:
+        The above diagram shows the cells which should be present in the list.
+        The red arrows denote the order in which the cells should be presented.
+        --------------------------------------------------- Mouni
+        '''
+
+        colon_idx = s.index(':')
+        col1 = s[0]
+        col2 = s[colon_idx + 1]
+
+        row1 = int(s[1:colon_idx])
+        row2 = int(s[colon_idx + 2:])
+
+        cells = []
+        for col in range(ord(col1), ord(col2) + 1):
+            for row in range(row1, row2 + 1):
+                cell = chr(col) + str(row)
+                cells.append(cell)
+
+        return sorted(cells)
+
+    
+    #1859:  Sorting the Sentence
+    def lc_1859(self,l):
+        '''
+        A sentence is a list of words that are separated by a single space with no leading or trailing spaces. 
+        Each word consists of lowercase and uppercase English letters.
+        A sentence can be shuffled by appending the 1-indexed word position to each word 
+        then rearranging the words in the sentence.
+        For example, the sentence "This is a sentence" can be shuffled as "sentence4 a3 is2 This1" or "is2 sentence4 This1 a3".
+        Given a shuffled sentence s containing no more than 9 words, reconstruct and return the original sentence.
+
+        Example 1:
+
+        Input: s = "is2 sentence4 This1 a3"
+        Output: "This is a sentence"
+        Explanation: Sort the words in s to their original positions "This1 is2 a3 sentence4", then remove the numbers.
+        --------------------------------------------------- Mouni
+        '''
+
+        s = l.split()
+        n = len(s)
+        res = [""] * n
+
+        for i in s:
+            k= int(i[-1])
+            res[k - 1] = i[:-1]
+        return " ".join(res)
+    
+
+    #1021: Remove Outermost Parenthesis
+    def lc_1021(self,s):
+
+        '''
+        A valid parentheses string is either empty "", "(" + A + ")", or A + B, 
+        where A and B are valid parentheses strings, 
+        and + represents string concatenation.
+
+        For example, "", "()", "(())()", and "(()(()))" are all valid parentheses strings.
+        A valid parentheses string s is primitive if it is nonempty, and 
+        there does not exist a way to split it into s = A + B, with A and B nonempty valid parentheses strings.
+
+        Given a valid parentheses string s, consider its primitive decomposition: s = P1 + P2 + ... + Pk, 
+        where Pi are primitive valid parentheses strings.
+
+        Return s after removing the outermost parentheses of every primitive string in the primitive decomposition of s.
+
+        Example 1:
+
+        Input: s = "(()())(())"
+        Output: "()()()"
+        Explanation: 
+        The input string is "(()())(())", with primitive decomposition "(()())" + "(())".
+        After removing outer parentheses of each part, this is "()()" + "()" = "()()()".
+        --------------------------------------------------- Mouni
+        '''
+
+        result = []
+        bal = 0
+
+        for char in s:
+            if char == '(':
+                if bal > 0:
+                    result.append(char)
+                bal += 1
+            elif char == ')':
+                bal -= 1
+                if bal > 0:
+                    result.append(char)                                                                              
+
+        return ''.join(result)
+    
+
+    #760: Find Anagram Mappings
+    def lc_760(self,num1,num2):
+        '''
+        Given two lists Aand B, and B is an anagram of A. 
+        B is an anagram of A means B is made by randomizing the order of the elements in A.
+
+        We want to find an index mapping P, from A to B. A mapping P[i] = j means the ith element in A appears in B at index j.
+
+        These lists A and B may contain duplicates. If there are multiple answers, output any of them.
+
+        For example, given
+
+        A = [12, 28, 46, 32, 50]
+        B = [50, 12, 32, 46, 28]
+        We should return
+        [1, 4, 3, 2, 0]
+        as P[0] = 1 because the 0th element of A appears at B[1], and P[1] = 4 
+        because the 1st element of A appears at B[4], and so on.
+        --------------------------------------------------- Mouni
+        '''
+        lst=[]
+        for i in num1:
+            x=num2.index(i)
+            lst.append(x)
+        return lst
+
+
+    #1688: Count of Matches in Tournament
+    def lc_1688(self, n: int) -> int:
+        '''
+        You are given an integer n, the number of teams in a tournament that has strange rules:
+        If the current number of teams is even, each team gets paired with another team. 
+        A total of n / 2 matches are played, and n / 2 teams advance to the next round.
+        If the current number of teams is odd, one team randomly advances in the tournament, and the rest gets paired. 
+        A total of (n - 1) / 2 matches are played, and (n - 1) / 2 + 1 teams advance to the next round.
+        Return the number of matches played in the tournament until a winner is decided.
+
+        Example 1:
+
+        Input: n = 7
+        Output: 6
+        Explanation: Details of the tournament: 
+        - 1st Round: Teams = 7, Matches = 3, and 4 teams advance.
+        - 2nd Round: Teams = 4, Matches = 2, and 2 teams advance.
+        - 3rd Round: Teams = 2, Matches = 1, and 1 team is declared the winner.
+        Total number of matches = 3 + 2 + 1 = 6.
+        --------------------------------------------------- Mouni
+        '''
+        
+        i=n
+        c=0
+        while i!=1:
+            if(i%2==0):
+                c+=i//2
+                i=i//2
+            else:
+                c+=(i-1)//2
+                i=(i-1)//2 +1
+        return c
+
+
+    #2006: Count Number of Pairs With Absolute Difference K
+    def lc_2006(self,arr, k):
+
+        '''
+        Given an integer array nums and an integer k, 
+        return the number of pairs (i, j) where i < j such that |nums[i] - nums[j]| == k.
+        The value of |x| is defined as:
+        x if x >= 0.
+        -x if x < 0.
+
+        Example 1:
+        Input: nums = [1,2,2,1], k = 1
+        Output: 4
+        Explanation: The pairs with an absolute difference of 1 are:
+        - [1,2,2,1]
+        - [1,2,2,1]
+        - [1,2,2,1]
+        - [1,2,2,1]
+        --------------------------------------------------- Sonu
+        '''
+        n=len(arr)
+        count = 0
+
+        # Pick all elements one by one
+        for i in range(0, n):
+
+            # See if there is a pair of this picked element
+            for j in range(i+1, n) :
+
+                if arr[i] - arr[j] == k or arr[j] - arr[i] == k:
+                    count += 1
+
+        return count
+
+
+    
+    #709: To Lower Case
+    def lc_709(self,s):
+
+        '''
+        Given a string s, return the string after replacing every uppercase letter with the same lowercase letter.
+        Example 1:
+        Input: s = "Hello"
+        Output: "hello"
+        --------------------------------------------------- Sonu
+        '''
+
+        ns=''
+
+        for i in range(len(s)):
+
+
+
+            if(s[i] >= 'A' and s[i] <= 'Z'):
+
+                ns= ns+chr((ord(s[i]) + 32))
+            else:
+
+                ns= ns + s[i]
+        return(ns)
+    
+    
+    #2283: Check if Number Has Equal Digit Count and Digit Value
+    def lc_2283(self,num):
+
+        '''
+        You are given a 0-indexed string num of length n consisting of digits.
+        Return true if for every index i in the range 0 <= i < n, 
+        the digit i occurs num[i] times in num, otherwise return false.
+
+        Example 1:
+        Input: num = "1210"
+        Output: true
+        Explanation:
+        num[0] = '1'. The digit 0 occurs once in num.
+        num[1] = '2'. The digit 1 occurs twice in num.
+        num[2] = '1'. The digit 2 occurs once in num.
+        num[3] = '0'. The digit 3 occurs zero times in num.
+        The condition holds true for every index in "1210", so return true.
+        --------------------------------------------------- Sonu
+        '''
+
+        n = len(num)
+
+        for i in range(n):
+            digit_count = num.count(str(i))
+            if digit_count != int(num[i]):
+                return False
+
+        return True
+    
+
+    #2315: Count Asterisks
+    def lc_2315(self,s):
+
+        '''
+        You are given a string s, where every two consecutive vertical bars '|' are grouped into a pair. 
+        In other words, the 1st and 2nd '|' make a pair, the 3rd and 4th '|' make a pair, and so forth.
+        Return the number of '*' in s, excluding the '*' between each pair of '|'.
+        Note that each '|' will belong to exactly one pair.
+
+        Example 1:
+        Input: s = "l|*e*et|c**o|*de|"
+        Output: 2
+        Explanation: The considered characters are underlined: "l|*e*et|c**o|*de|".
+        The characters between the first and second '|' are excluded from the answer.
+        Also, the characters between the third and fourth '|' are excluded from the answer.
+        There are 2 asterisks considered. Therefore, we return 2.
+        --------------------------------------------------- Sonu
+        '''
+
+        res=''
+        j=s.split('|')
+        data=j[::2]
+        res=str(data)
+        return res.count('*')
+    
+    #1160:  Find Words That Can Be Formed by Characters
+    def lc_1160(self,words,chars):
+
+        '''
+        You are given an array of strings words and a string chars.
+        A string is good if it can be formed by characters from chars (each character can only be used once).
+        Return the sum of lengths of all good strings in words.
+
+        Example 1:
+        Input: words = ["cat","bt","hat","tree"], chars = "atach"
+        Output: 6
+        Explanation: The strings that can be formed are "cat" and "hat" so the answer is 3 + 3 = 6.
+        --------------------------------------------------- Sonu
+        '''
+        result=0
+
+        for i in words:
+            count=0
+            for j in i:
+                if (i.count(j)>chars.count(j)):
+                    count=1
+
+
+            if count==0:
+
+                result+=len(i)
+        return result
+
+    
