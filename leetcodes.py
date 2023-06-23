@@ -1,4 +1,5 @@
 class Leetcode:
+    
     def lc_2160(self, number):
         
         
