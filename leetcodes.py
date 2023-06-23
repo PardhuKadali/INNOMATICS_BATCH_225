@@ -1,4 +1,76 @@
 class Leetcode:
+    def lc_2160(self, number):
+        
+        
+        '''
+        Minimum Sum of Four Digit Number After Splitting Digits
+        You are given a positive integer num consisting of exactly four digits. Split num into two new integers new1 and
+        new2 by using the digits found in num. Leading zeros are allowed in new1 and new2, and all the digits found
+        in num must be used.
+        
+        For example, given num = 2932, you have the following digits: two 2's, one 9 and one 3. Some of the
+        possible pairs [new1, new2] are [22, 93], [23, 92], [223, 9] and [2, 329].
+        
+        Return the minimum possible sum of new1 and new2.
+        
+        Example 1:
+        
+        Input: num = 2932
+        Output: 52
+        Explanation: Some possible pairs [new1, new2] are [29, 23], [223, 9], etc.
+        The minimum sum can be obtained by the pair [29, 23]: 29 + 23 = 52.
+        '''
+
+        digits = sorted(str(number))
+        return sum(int(digit) for digit in digits)
+
+        number = 2160
+        print(minimum_sum_of_four_digit_number1(number))
+    
+    
+    
+    # Manikanta
+    def lc_1773(self, items, ruleKey, ruleValue):
+        
+        
+        '''
+        Count Items Matching a Rule
+        You are given an array items, where each items[i] = [typei, colori, namei] describes the type, color, and
+        name of the ith item. You are also given a rule represented by two strings, ruleKey and ruleValue.
+        
+        The ith item is said to match the rule if one of the following is true:
+        
+         ruleKey == "type" and ruleValue == typei
+        
+         ruleKey == "color" and ruleValue == colori
+        
+         ruleKey == "name" and ruleValue == namei.
+         
+        Return the number of items that match the given rule.
+        
+        Example 1:
+        
+        Input: items = [["phone","blue","pixel"],["computer","silver","lenovo"],
+        ["phone","gold","iphone"]], ruleKey = "color", ruleValue = "silver"
+        
+        Output: 1
+        
+        Explanation: There is only one item matching the given rule, which is 
+        ["computer","silver","lenovo"].
+        '''
+        
+        count = 0
+
+        for item in items:
+            if ruleKey == "type" and item[0] == ruleValue:
+                count += 1
+            elif ruleKey == "color" and item[1] == ruleValue:
+                count += 1
+            elif ruleKey == "name" and item[2] == ruleValue:
+                count += 1
+
+        return count
+    
     def __init__(self):
         pass
     
